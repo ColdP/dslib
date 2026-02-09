@@ -1,0 +1,137 @@
+{
+  "DesignPhone Series": [
+    {
+      "name": "DesignPhone 2",
+      "specs": "型号名称: DesignPhone 2\n型号代码: MRDSPH0201\n\nCPU\nDesign K3 Mobile / 由MORO自主研发的Design K系列第三代移动平台\nNPU: Design AI Boost 2 Mobile\n\n屏幕: 三星 M14 Pro OLED屏幕 / MORO LTPO+ 1-165Hz 1.5K / 6.3英寸\n\n电池容量: 8000mAh\n充电: 120W有线 80W无线 22.5W无线反充 30W有线反向充电\n\n内存/闪存: LPDDR5X + UFS 4.1 Ultra\nUSB3.2 Gen 2\n重量: 189g\n\n系统\nDesignOS 3 (Based on Android 17)\nDesignOS 3L (Based on Linux)\n\nMain Camera: Samsung ISOCELL HP2 (1/1.3\", 200MP)\nUltra-Wide Camera: Sony LYTIA LYT-600 (1/1.95\", 50MP)\nTelephoto Camera: OmniVision OVA0B (1/1.8\", 100MP)\nFront Camera: Samsung ISOCELL JN5 (1/2.76\", 50MP)\n\n价格\n12G+256GB: 3599\n12G+512GB: 3899\n16G+512GB: 4099\n16G+1TB: 4499"
+    },
+    {
+      "name": "DesignPhone 2 Pro",
+      "specs": "型号名称: DesignPhone 2 Pro\n型号代码: MRDSPH0202\n\nCPU\n第六代骁龙®8至尊版移动平台\nNPU: Design AI Boost 2 Pro Mobile\n\n屏幕: LG Q5 Max OLED屏幕 / 165Hz 2K / 6.3英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)\n背屏: 华星光电 O1 Max / MORO LTPO+ 自适应刷新率技术(1~165Hz) / 2.15 英寸\n\n电池容量: 7600mAh\n充电: 120W有线 80W无线 30W无线反充 35W有线反充\n\n内存/闪存: LPDDR6 + UFS 4.1 Pro\nUSB3.2 Gen2\n重量: 199g\n\n系统\nDesignOS 3 (Based on Android 17)\nDesignOS 3L (Based on Linux)\n\nMain Camera: Sony LYT-901 (1/1.12\", 200MP)\nUltra-Wide Camera: OV OVA0B (1/1.8\", 100MP)\nTelephoto Camera: 200MP: Samsung HP9 (1/1.4\", 200MP)\nFront Camera: Sony LYTIA LYT-500 (1/2.9\", 50MP)\n\n价格\n12G+256GB: 4399\n12G+512GB: 4699\n16G+512GB: 4999\n16G+1TB: 5399"
+    },
+    {
+      "name": "DesignPhone 2 Pro+",
+      "specs": "型号名称: DesignPhone 2 Pro+\n型号代码: MRDSPH0203\n\nCPU\n第六代骁龙®8至尊版移动平台\nNPU: Design AI Boost 2 Pro Mobile\n\n屏幕: LG Max 2 双层OLED屏幕 / MORO LTPO+ 自适应刷新率技术(1~165Hz) / 165Hz / 6.9英寸\n背屏: 华星光电 O1 Max / MORO LTPO+ 自适应刷新率技术(1~165Hz) / 2.42 英寸\n\n电池容量: 9000mAh\n充电: 100W有线 80W无线 40W无线反充 45W有线反充\n\n\n内存/闪存: LPDDR6 + UFS 4.1 Pro\nUSB3.2 Gen2\n重量: 221g\n\n系统\nDesignOS 3 (Based on Android 17)\nDesignOS 3L (Based on Linux)\n\nMain Camera: Sony LYT-901 (1/1.12\", 200MP)\nUltra-Wide Camera: OV OVA0B (1/1.8\", 100MP)\nTelephoto Camera: 200MP: Samsung HP9 (1/1.4\", 200MP)\nFront Camera: Sony LYTIA LYT-500 (1/2.9\", 50MP)\n\n价格\n12G+256GB: 4999\n12G+512GB: 5399\n16G+512GB: 5699\n16G+1TB: 6299"
+    }
+  ],
+  "M Series": [
+    {
+      "name": "DesignPhone M1C",
+      "specs": "型号名称: DesignPhone M1C\n型号代码: MRDSPHMM03\n\nCPU\n高通骁龙685 (5G Edition)\n屏幕: LCD / 90Hz 720P\n\n电池容量: 4500mAh\n充电: 22.5W有线\n\n内存/闪存: LPDDR4 + UFS 2.2\nUSB2.0\n重量: 189g\n\n系统: DesignOS 2 (Based on Android 15)\n\n价格\n4G+64GB: 599\n6G+64GB: 649\n6G+128GB: 799\n8G+128GB: 849\n8G+256GB: 999"
+    },
+    {
+      "name": "DesignPhone M1",
+      "specs": "型号名称: DesignPhone M1\n型号代码: MRDSPHMM01\n\nCPU\nDesign B1 Mobile / 由MORO自主研发的Design B系列第一代移动平台（三星12nm工艺）\nNPU: Design AI Boost Minus Mobile\n\n屏幕: LCD / 120Hz 720P / 6.7英寸\n\n电池容量: 6000mAh\n充电: 45W有线+10W有线反向充电\n\n内存/闪存: LPDDR4 + UFS 2.2\nUSB2.0\n重量: 214g\n\n系统: DesignOS 2 (Based on Android 15)\n\n价格\n8G+128GB: 799\n8G+256GB: 999"
+    },
+    {
+      "name": "DesignPhone M1S",
+      "specs": "型号名称: DesignPhone M1S\n型号代码: MRDSPHMM02\n\nCPU\nDesign B1 Pro Mobile / 由MORO自主研发的Design B系列第一代移动平台增强版（中芯国际8nm工艺）\nNPU: Design AI Boost Mobile\n\n屏幕: 天马 OLED / 120Hz 1080P / 6.9英寸\n\n电池容量: 6500mAh\n充电: 65W有线 + 10W有线反向充电（需要 USB-C to USB-C 数据线）\n\n内存/闪存: LPDDR4 + UFS 3.1\nUSB2.0\n重量: 205g\n\n支持红外\n防水防尘等级：IP68\n\n系统: DesignOS 2 (Based on Android 16)\n\n价格\n8G+256GB: 1399\n12G+256GB: 1699\n12G+512GB: 1999"
+    }
+  ],
+  "H Series": [
+    {
+      "name": "DesignPhone H26",
+      "specs": "型号名称: DesignPhone H26\n型号代码: MRDSPH2600\n\nCPU\nDesign H2 Mobile / 由MORO自主研发的Design H系列第二代移动平台\nNPU: Design AI Boost Mobile\n\n屏幕: 天马 OLED屏幕 / 144Hz 1080P / 6.36英寸\n\n电池容量: 7000mAh\n充电: 80W有线 30W无线 20W有线反向充电\n\n内存/闪存: LPDDR5 + UFS 3.2 Pro\nUSB 2.0\n重量: 197g\n\n防水防尘等级: IP54 / IP65\n\nMain Camera: Sony LYT-600 (1/1.95 inch / 50MP)\nWide Camera: Sony IMX563 (1/2.55 inch / 12MP)\nFront Camera: OmniVision OV50D (1/2.88 inch / 50MP)\n\n系统: DesignOS 2 (Based on Android 16)\n\n价格\n12G+256GB: 2199\n12G+512GB: 2499\n16G+512GB: 2699\n购买 H26 标准版：送“移动生活礼包”（Design Free 耳机 + 保温杯）"
+    },
+    {
+      "name": "DesignPhone H26 Pro",
+      "specs": "Model Name: DesignPhone H26 Pro\nModel Code: MRDSPH2601\nCPU: Design H2 Pro Mobile / 由MORO自主研发的Design H系列第二代移动平台增强版\nNPU: Design AI Boost Mobile\nRAM / ROM: LPDDR5 / UFS 4.0\nUSB 3.1\nBattery Capacity: 7500mAh\nWeight: 201g\nDisplay: 京东方 X2P LTPS OLED / 1.5K 144Hz\nScreen Size: 6.5 inch\nWired Charging Power: 120W\nWireless Charging Power: 45W\nReverse Wired Charging: 20W\n\nMain Camera: ISOCELL HP3 (1/1.4 inch / 200MP)\nWide Camera: Sony IMX582 (1/2 inch / 48MP)\nFront Camera: Samsung ISOCELL JN5 (1/2.76 inch / 50MP)\n\n防水防尘等级: IP65 / IP68\n\nOperating System: DesignOS 2 (Based on Android 16)\n\n价格\n12G+256GB: 2999\n12G+512GB: 3299\n16G+512GB: 3599\n16G+1TB: 3999\n购买 H26 Pro：送“全能旗舰礼包”（Design Free Plus 耳机 + 保温杯 + 15W无线充电器）"
+    }
+  ],
+  "Turbo Series": [
+    {
+      "name": "DesignPhone Turbo",
+      "specs": "Model Name: DesignPhone Turbo\nModel Code: MRDSPHTU10\nCPU: Design K1 Turbo Mobile Platform / 由MORO自主研发的Design K系列第一代移动平台游戏版\nGPU: Design Graphic Master Mobile\nNPU: Design AI Boost Mobile\nRAM / ROM: LPDDR5 / UFS 4.0\nUSB 3.2\nBattery Capacity: 8500 mAh\nWeight: 223g\nDisplay Panel Type: BOE T2+ OLED\nRefresh Rate: MORO LTPS 144Hz\nScreen Size: 6.83 inch\nWired Charging Power: 100W\nWireless Charging Power: 65W\nReverse Wired Charging: 30W\n\nMain Camera: LYT-600 (50MP)\nTelephoto Camera: IMX858 (50MP)\nUltra-Wide Camera: OV13B10 (42MP）\n\n12G+256GB: 2199\n12G+512GB: 2599\n16G+512GB: 2899"
+    },
+    {
+      "name": "DesignPhone Turbo Pro",
+      "specs": "Model Name: DesignPhone Turbo Pro\nModel Code: MRDSPHTU11\nCPU: Snapdragon 8 Elite\nGPU: Design Graphic Master Pro Mobile\nNPU: Design AI Boost 2 Mobile\nRAM / ROM: LPDDR5X / UFS 4.0\nUSB 3.2\nBattery Capacity: 9000 mAh\nWeight: 227g\nDisplay Panel Type: CSOT E9 Pro OLED\nRefresh Rate: MORO LTPO+ Adaptive Refresh Rate Technology (1–165Hz)\nScreen Size: 6.9 inch\nWired Charging Power: 120W\nWireless Charging Power: 65W\nReverse Wired Charging: 30W\n\nMain Camera: OV50R (50MP)\nTelephoto Camera: LYT-601 (50MP)\nUltra-Wide Camera: JN1 (42MP）\n\n12G+256GB: 2699\n12G+512GB: 2899\n16G+512GB: 3199\n16G+1TB: 3699\n\nH26系列-线下走量机，Turbo系列-线上性价比"
+    }
+  ],
+  "S Series": [
+    {
+      "name": "DesignPhone S1",
+      "specs": "型号名称: DesignPhone S1\n型号代码: MRDSPHS1CC\n\nCPU\nDesign K2 Mobile / 由MORO自主研发的Design K系列第二代移动平台\nNPU: Design AI Boost Mobile\n\n屏幕: LG Q3+ OLED屏幕 / MORO LTPO+ 1-144Hz 1.5K / 6.3英寸\n\n电池容量: 7000mAh\n充电: 100W有线 60W无线 22.5W无线反充 27W有线反向充电\n\n内存/闪存: LPDDR5X + UFS 4.1\nUSB3.2 Gen 2\n重量: 182g\n\n系统: DesignOS 2 (Based on Android 16)\n\nMain Camera: OmniVision OV50H (1/1.3 inch / 100MP)\nUltra-Wide Camera: Sony LYT-600 (1/1.95 inch / 50MP)\nTelephoto Camera: Samsung ISOCELL GN3 (1/1.56 inch / 50MP)\nFront Camera: ISOCELL JN5 (1/2.76 inch / 50MP)\n\n价格\n12G+256GB: 3499\n12G+512GB: 3799\n16G+512GB: 3999\n16G+1TB: 4399\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599\n加购DesignDisplay X1s 显示器仅需¥2999"
+    },
+    {
+      "name": "DesignPhone S1 Pro",
+      "specs": "型号名称: DesignPhone S1 Pro\n型号代码: MRDSPHS1PC\n\nCPU\n第五代骁龙®8至尊版移动平台\nNPU: Design AI Boost Pro Mobile\n\n屏幕: LG Q4 Max OLED屏幕 / 165Hz 2K / 6.3英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)\n\n电池容量: 7200mAh\n充电: 100W有线 65W无线 20W无线反充 27W有线反充\n\n内存/闪存: LPDDR5X + UFS 4.1 Pro\nUSB3.2 Gen2\n重量: 190g\n\n系统: DesignOS 2 (Based on Android 16)\n\nMain Camera: ISOCELL HP3 (1/1.4 inch / 200MP)\nUltra-Wide Camera: Sony LYT-701 (1/1.95 inch / 50MP)\nTelephoto Camera: OmniVision OVA0B (1/1.8 inch / 100MP)\nFront Camera: ISOCELL JN5 (1/2.76 inch / 50MP)\n\n价格\n12G+256GB: 3999\n12G+512GB: 4299\n16G+512GB: 4499\n16G+1TB: 4999\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599\n加购DesignDisplay X1s 显示器仅需¥2999"
+    },
+    {
+      "name": "DesignPhone S1 Pro+",
+      "specs": "型号名称: DesignPhone S1 Pro+\n型号代码: MRDSPHS1PPS\n\nCPU\n第五代骁龙®8至尊版移动平台\nNPU: Design AI Boost Pro Mobile\n\n屏幕: 三星 M14 OLED屏幕 / 165Hz 2K / 6.9英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)\n\n电池容量: 7500mAh\n充电: 100W有线 80W无线 25W无线反充 27W有线反充\n\n\n内存/闪存: LPDDR5X + UFS 4.1 Pro\nUSB3.2 Gen2\n重量: 210g\n\n系统: DesignOS 2 (Based on Android 16)\n\nMain Camera: ISOCELL HP2 (1/1.3 inch / 200MP)\nUltra-Wide Camera: Sony LYT-701 (1/1.56 inch / 50MP)\nTelephoto Camera: OmniVision OVA0B (1/1.8 inch / 100MP)\nFront Camera: ISOCELL JN5 (1/2.76 inch / 50MP)\n\n价格\n12G+256GB: 4499\n12G+512GB: 4799\n16G+512GB: 4999\n16G+1TB: 5499\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599\n加购DesignDisplay X1s 显示器仅需¥2999"
+    },
+    {
+      "name": "DesignPhone S1 Ultra",
+      "specs": "型号名称: DesignPhone S1 Ultra\n型号代码\nMRDSPHS1UD (Design处理器版)\nMRDSPHS1US (高通骁龙处理器版)\n\nCPU\nDesign K2 Pro Mobile / 由MORO自主研发Design K系列第二代移动平台增强版 (台积电3nm)\n第五代骁龙®8至尊领先版移动平台\nNPU: Design AI Boost 2 Mobile\nGPU: Design Graphic Master Pro Mobile\n\n屏幕: LG Max 2 双层OLED屏幕 / 165Hz 2K / 6.9英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)\n\n电池容量: 7200mAh\n充电: 140W有线 80W无线 25W无线反充 30W有线反充\n\n内存/闪存: LPDDR5X + UFS 4.1 Pro\nUSB3.2 Gen2\n重量: 223g\n\n系统\nDesignOS 2 (Based on Android 16)\nDesignOS 2L (Based on Linux)\n\nMain Camera: Samsung ISOCELL HP2 (1/1.3 inch / 200MP)\nPeriscope Telephoto: Samsung ISOCELL HP3 (1/1.4 inch / 200MP)\nUltra-Wide Camera: OmniVision OVA0B (1/1.8 inch / 100MP)\nFront Camera: Sony LYT-500 (Design Vision F1) (1/2.51 inch / 50MP)\n\n价格\n12G+512GB: 6499\n16G+512GB: 6799\n16G+1TB: 7399\n24G+1TB: 7999\n24G+2TB: 8699\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3499\n加购DesignDisplay X1s 显示器仅需¥2999"
+    }
+  ],
+  "Special Series": [
+    {
+      "name": "DesignPhone SP 2026",
+      "specs": "A MORO & Intel COLLABORATION\nCO-ENGINEERED WITH FUJIFILM\nSILICON BY Intel Foundry 18A\n\n型号名称: DesignPhone SP 2026\n型号代码: MRDSPHSP26\n\nCPU: Design K2 Special Mobile / 由MORO自主研发Design K系列第二代移动平台特别版 (Intel 18A For ARM工艺)\nNPU: Design AI Boost Pro Mobile\n\n屏幕: LG Q4+ OLED屏幕 / 165Hz 2K / 6.9英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)\n\n电池容量: 7600mAh\n充电: 120W有线 80W无线 25W无线反充 27W有线反充\n\n内存/闪存: LPDDR5X + UFS 4.1 Pro\nUSB3.2 Gen2\n重量: 218g\n\n系统\nDesignOS 2 (Based on Android 16)\nDesignOS 2L (Based on Linux)\n\nMain Camera: ISOCELL HP2 (1/1.3 inch / 200MP)\nUltra-Wide Camera: Sony LYT-701 (1/1.56 inch / 50MP)\nTelephoto Camera: OmniVision OVA0B (1/1.8 inch / 100MP)\nFront Camera: Sony LYT-500 (Design Vision F1) (1/2.51 inch / 50MP)\n\n价格\n16G+512GB: 7599\n16G+1TB: 8299\n24G+1TB: 8999\n24G+2TB: 10299\nSP 顶配捆绑包 (24GB+1TB 手机+DesignDisplay 23英寸 4K 165Hz OLED 显示器): 12999\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3499\n加购DesignDisplay X1s 显示器仅需¥2999"
+    },
+    {
+      "name": "FUJI Phone 2",
+      "specs": "Model Name: FUJI Phone 2\nModel Code: MRFJPHGL02\nCPU: Snapdragon 8 Elite Gen 5\nGPU: Design Graphic Master Pro Mobile\nNPU: Design AI Boost 2 Pro Mobile\nRAM / ROM: LPDDR5X / UFS 4.1 Pro\nBattery Capacity: 6700 mAh\nWeight: 238.2g\nDisplay Panel Type: Samsung M14 Pro OLED\nRefresh Rate: MORO LTPO+ Adaptive Refresh Rate Technology (1–144Hz)\nScreen Size: 6.9 inch\nRear Display: 1.76 inch\nResolution: 2608 x 1204\nWired Charging Power: 120W\nWireless Charging Power: 65W\nReverse Wireless Charging: 22.5W\nReverse Wired Charging: 30W\n\nMain Camera: LYT-901 (1 inch, 200MP)\nTelephoto Camera: Samsung ISOCELL HP9T (1/1.4 inch, 200MP)\nUltra-Wide Camera: OmniVision OVA0B (1/1.8 inch, 100MP）\nFront Camera: Design Vision F1 (LYT-500 / Pro Vlog Sensor) (1/2.51 inch, 50MP)\nLiDAR Scanner: Sony SPAD F1 + VCSEL X1 Pro LiDAR System\nSupports 10-bit High Bitrate Video and Advanced Log Recording (equivalent to pro-level workflows)\n\nOperating System: DesignOS 2 For FUJI (Based on Android 16)\n\n12GB + 512GB / 6,999 CNY / 1,399 USD / 1,599 EUR / 214,800 JPY\n16GB + 512GB / 7,499 CNY / 1,499 USD / 1,699 EUR / 229,800 JPY\n16GB + 1TB / 8,499 CNY / 1,699 USD / 1,899 EUR / 259,800 JPY\n16GB + 2TB / 10,499 CNY / 2,099 USD / 2,299 EUR / 319,800 JPY\n24GB + 1TB / 9,299 CNY / 1,849 USD / 2,049 EUR / 281,800 JPY\n24GB + 2TB / 11,299 CNY / 2,249 USD / 2,449 EUR / 341,800 JPY\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3499\n加购DesignDisplay X1s 显示器仅需¥2999"
+    },
+    {
+      "name": "DesignPhone Aero",
+      "specs": "Model Name: DesignPhone Aero\nModel Code: MRDSPHAR01\nCPU: Design K2 Pro Mobile / 由MORO自主研发的Design K系列第二代移动平台增强版\nNPU: Design AI Boost 2 Pro Mobile\nRAM / ROM: LPDDR5X / UFS 4.1 Pro\nBattery Capacity: 5800mAh\nThickness: 5.86mm\nWeight: 164g\nDisplay : LG Q3 For Slim OLED / MORO LTPO+ Adaptive Refresh Rate Technology (1–165Hz) / 6.7 inch 1.5K\nWired Charging Power: 90W\nWireless Charging Power: 45W\n\nMain Camera: ISOCELL HP9 (1/1.4inch / 200MP)\nTelephoto Camera: Sony IMX882 (50MP)\nFront Camera: ISOCELL JN5 (1/2.76 inch / 50MP)\n\nOperating System: DesignOS 2 (Based on Android 16)\n\n12+256 4699\n12+512 4999\n16+512 5299\n16+1TB 5699\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599\n加购DesignDisplay X1s 显示器仅需¥2999"
+    },
+    {
+      "name": "DesignPhone Fold",
+      "specs": "Model Name: DesignPhone Fold\nModel Code: MRDSPHFD00\nCPU: Design K2 Pro Mobile / 由MORO自主研发的Design K系列第二代移动平台增强版\nNPU: Design AI Boost 2 Pro Mobile\nGPU: Design Graphic Master Pro Mobile\nRAM / ROM: LPDDR5X / UFS 4.1 Pro\nBattery Capacity: 6320mAh\nMain Display: 8.5-inch LG Q3 Pro OLED For Fold (2480 x 2200, MORO LTPO+ 1–144Hz, 2800 nits)\nCover Display: 6.9-inch Samsung M14 Plus AMOLED (19.5:9, 2844 x 1312, MORO LTPO+ 1–144Hz)\nDimensions (Unfolded): 163.5 x 156.8 x 4.2 mm\nDimensions (Folded): 163.5 x 77.2 x 8.6 mm\nWeight: 238g\nWired Charging Power: 120W\nWireless Charging Power: 45W\n\nMain Camera: LYT-818 (1/1.28 inch / 50MP)\nTelephoto Camera: ISOCELL JN5 (1/2.76 inch / 50MP)\nUltra-Wide Camera: ISOCELL JN1 (1/2.76 inch / 50MP)\nFront Camera: ISOCELL JN5 (1/2.76 inch / 50MP)\n\nOperating System: DesignOS 2 (Based on Android 16)\n\n12G+512GB: 8999\n16G+512GB: 9699\n16G+1TB: 10499\n24G+1TB: 10999\n24G+2TB: 12699\n任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3299\n加购DesignDisplay X1s 显示器仅需¥2799"
+    }
+  ],
+  "DesignKids Series": [
+    {
+      "name": "DesignKidsPhone",
+      "specs": "Model Name: DesignKidsPhone\nModel Code: MRDSKPH0000\nCPU: Snapdragon® 7s Gen 2 Mobile Platform\n\nRAM / ROM: LPDDR4X / UFS 3.1\nBattery Capacity: 3860mAh\nDisplay: 5.4-inch BOE LCD / 1920x1080, 90Hz\nWeight: 128g\nWired Charging Power: 35W\n\nBack Cover: High-strength matte polycarbonate\nMid-frame: High-strength reinforced plastic with internal metal bracket\nCover Glass: Strengthened aluminosilicate glass\n\nOperating System: DesignKidsOS 1 (Based on Android 15)\n\n6+128: 699\n8+128: 799\n8+256: 949"
+    },
+    {
+      "name": "DesignKidsPhone Pro",
+      "specs": "Model Name: DesignKidsPhone Pro\nModel Code: MRDSKPH000P\nCPU: Snapdragon® 7+ Gen 2 Mobile Platform\n\nRAM / ROM: LPDDR4X / UFS 3.2\nBattery Capacity: 4200mAh\nDisplay: 5.4-inch BOE OLED / 1.2K, 120Hz\nWeight: 147g\nWired Charging Power: 65W\n\nBody Materials: AG frosted glass back cover + sandblasted aluminum alloy frame\nSpecial Hardware: Action Button\n\nMain Camera: OV50E (50MP, 1/1.55 inch)\nUltra-Wide Camera: OV13B10 (12MP, 1/3.06 inch)\n\nOperating System: DesignKidsOS 1 (Based on Android 15)\n\n8+128: 999\n12+256: 1299\n12+512: 1499\n\n『喜羊羊与灰太狼』联名版：\n12+512: 1799"
+    },
+    {
+      "name": "DesignKidsPhone 2",
+      "specs": "Model Name: DesignKidsPhone 2\nModel Code: MRDSKPH0002\nCPU: Snapdragon® 7s Gen 3 Mobile Platform\n\nRAM / ROM: LPDDR4X / UFS 3.1\nBattery Capacity: 4200mAh\nDisplay: 5.4-inch BOE LCD / 1920x1080, 120Hz\nWeight: 132g\nWired Charging Power: 45W\n\nBack Cover: High-strength matte polycarbonate\nMid-frame: High-strength reinforced plastic with internal metal bracket\nCover Glass: Strengthened aluminosilicate glass\n\nOperating System: DesignKidsOS 2 (Based on Android 16)\n\n6+128: 749\n8+128: 859\n8+256: 999"
+    },
+    {
+      "name": "DesignKidsPhone 2 Pro",
+      "specs": "Model Name: DesignKidsPhone 2 Pro\nModel Code: MRDSKPH002P\nCPU: Design Hs2 Mobile / 由MORO自主研发的Design Hs系列第二代移动平台\n(Design Hs2≈>Snapdragon 7 Gen 3)\nNPU: Design AI Boost 2 Mobile\n\nRAM / ROM: LPDDR5 / UFS 3.2 Pro\nBattery Capacity: 5000mAh\nDisplay: 5.8-inch BOE OLED / 1.2K, 120Hz\nWeight: 152g\nWired Charging Power: 65W\nWireless charging Power: 18.5W\n\nBody Materials: AG frosted glass back cover + sandblasted aluminum alloy frame\nSpecial Hardware: Action Button\n\nMain Camera: LYT-600 (50MP, 1/1.95 inch)\nUltra-Wide Camera: OV13B10 (32MP, 1/3.14 inch)\n\nOperating System: DesignKidsOS 2 (Based on Android 16)\n\n普通版：\n8+256: 1199\n12+256: 1399\n12+512: 1599\n\n『喜羊羊与灰太狼』联名版：\n12+512: 1899"
+    }
+  ],
+  "Display Series": [
+    {
+      "name": "DesignDisplay M1",
+      "specs": "DesignDisplay M1 (Entry-Level)\n定位：全能入门与生态普及\n\n核心显示参数\n面板类型: 华星光电 (CSOT) 高刷 IPS 面板\n屏幕尺寸: 23.8 英寸\n分辨率: 1920 × 1080 (FHD)\n刷新率: 120Hz (原生) / 支持 Adaptive-Sync\n色彩与亮度: 99% sRGB 色域 / 300 nits 典型亮度 / $Delta E < 2$ (出厂校色)\n\n生态核心 (Essential Ecosystem)\nDesignDex 快速启动\n全功能 USB-C (15W): 支持视频传输\nD-Button: 侧边物理按键，用于在手机桌面模式和 PC 信号源之间一键切换。\n简易版 M-Lift 支架: 支持仰俯调节 / VESA 75mm 标准壁挂孔。\n\n官方零售价: 899\n首销优惠价: 749\nDesignPhone 加购价: 599"
+    },
+    {
+      "name": "DesignDisplay S1",
+      "specs": "DesignDisplay S1\n\n屏幕面板 (Panel)\n面板类型: 华星光电 (CSOT) Fast-IPS\n屏幕尺寸: 23.8 英寸\n分辨率: 2560 × 1440 (2K QHD)\n像素密度: 123.4 PP\n刷新率: 144Hz (原生) / 165Hz (超频)\n响应时间: 1ms (GtG)\n\n色彩与光影 (Color & Light)\n色彩深度: 8-bit + Hi-FRC (等效 10-bit)\n色域覆盖: 100% sRGB / 95% DCI-P3\n亮度: 400 nits (典型值)\n认证: VESA DisplayHDR 400\n\n核心功能：生态激活 (Ecosystem)\nDesignDex 快速启动: 接入 USB-C 接口后，0.5秒内自动激活手机内置的桌面模式。\nDesignOS 2L Link: 完美适配 Linux 模式，支持显示器端的键鼠直连控制手机。\n一键切换: 机身侧边设有专用的 \"D-Button\"，可在手机 Dex 模式和电脑信号源之间快速无缝切换。\n\n接口与供电 (Connectivity)\n全功能 USB-C: 支持 80W PD 反向快充 / 支持最高 65W 的 PPS 反向快充\n其他接口: 1 × HDMI 2.0 / 1 × DisplayPort 1.4 / 2 × USB-A 3.0 (扩展坞功能)。\n\n零售价: 1499\n首销优惠价: 1299\nDesignPhone 加购价: 999"
+    },
+    {
+      "name": "DesignDisplay S1 Plus",
+      "specs": "DesignDisplay S1 Plus\n定位: 27 英寸 2K Fast-IPS 高刷生产力大屏\n\n核心参数\n面板类型: LG Fast-IPS\n屏幕尺寸: 27.0 英寸\n分辨率: 2560 × 1440 (2K QHD)\n刷新率: 原生 165Hz / 超频 180Hz\n色彩素质: 8-bit + Hi-FRC (等效 10-bit) / 99% sRGB / 95% DCI-P3\n亮度: 500 nits (典型值) / VESA DisplayHDR 500 认证\n响应时间: 1ms (GtG)\n\n补给与无线能力 (Power & Wireless)\n底座无线充: 集成 Qi2 无线快充模块，支持最高 15W 无线输出。\n有线反向供电: 全功能 USB-C 支持 PD 3.0 (100W)，完美适配手机及轻薄笔记本。\n\n核心连接性 (Connectivity)\n全功能接口: 2 × USB-C (支持 DP Alt Mode & 数据传输)。\n网络接口: 1 × 2.5GbE (2500M 网口)，大幅提升手机桌面模式的载入速度。\n视频接口: 2 × HDMI 2.1 / 1 × DisplayPort 1.4。\n数据接口: 2 × USB-A (3.2 Gen1) / 1 × 3.5mm 音频接口。\n\n生态特性\nDesignDex 2.0: 接入手机后 0.3 秒唤醒桌面模式，UI 针对 27 寸物理面积优化。\nD-Button: 侧边物理快捷键，一键切换手机系统与外接 PC 信号。\nM-Lift Pro 支架: 支持 150mm 升降、-5°~35° 俯仰、以及 90° 垂直旋转（UI 自动适配）。\n\n价格信息\n官方零售价: 2199\n首销价: 1999\nDesignPhone 加购价: 1699"
+    },
+    {
+      "name": "DesignDisplay X1s",
+      "specs": "DesignDisplay X1s\n定位：OLED 专业入门级显示器\n\n核心规格\n面板类型：LG 印刷 OLED\n屏幕尺寸: 23.8英寸\n分辨率：2560 × 1440 (2K QHD)\n刷新率：120Hz\n色彩素质：$Delta E < 1.2$ (出厂校色)// 10-bit 真色彩 (10.7亿色) / 99% DCI-P3 色域覆盖\n峰值亮度：800 nits (HDR 峰值) / 400 nits (典型)\n\n接口与供电 (Balanced Productivity)\n全功能 USB-C：支持 90W PD 3.0 反向快充 / 支持 100W PPS 反向快充\n信号接口：1 × HDMI 2.1 / 1 × DisplayPort 1.4 / 1 × USB-C。\n\n工业设计材质：铝合金边框 + 简约版 M-Lift 支架（支持升降旋转）\n\n生态\nDesignDex 快速启动: 接入 USB-C 接口后，0.5秒内自动激活手机内置的桌面模式。\nDesignOS 2L Link: 完美适配 Linux 模式，支持显示器端的键鼠直连控制手机。\n一键切换: 机身侧边设有专用的 \"D-Button\"，可在手机 Dex 模式和电脑信号源之间快速无缝切换。\n\n官方零售价: 3699\n首销优惠价: 3499\nDesignPhone 加购价: 2999"
+    },
+    {
+      "name": "DesignDisplay X1",
+      "specs": "DesignDisplay X1\n屏幕面板 (Panel)\n面板类型: 华星光电 (CSOT) IJP-OLED (印刷 OLED)\n屏幕尺寸: 23.0英寸\n分辨率: 3840 × 2160 (4K UHD)\n像素密度: 191.5 PPI (视网膜级设计精度)\n刷新率: 165Hz (支持 MORO ProSync 自适应刷新技术)\n响应时间: 0.03ms (GtG)\n\n色彩与亮度 (Color & Brightness)\n色彩深度: 真 10-bit (10.7亿色)\n色域覆盖: 100% DCI-P3 / 99% Adobe RGB / 100% sRGB\n色彩精准度: $Delta E < 1$ (出厂逐台校色)\n峰值亮度: 1200 nits (HDR 峰值) / 600 nits (典型)\n对比度: 1,000,000:1 (无限接近纯黑)\n认证: VESA DisplayHDR True Black 600\n\n交互与连接 (Connectivity)\n全功能 USB-C: 支持 140W PD 3.1 反向供电 / 支持最高 100W 的 PPS 反向快充\n视频接口: 2 × Thunderbolt 5 (支持 80Gbps 带宽) 1 × DisplayPort 2.11 × HDMI 2.1 (满血版)\n数据接口: 3 × USB-A (3.2 Gen2) / 1 × 3.5mm 音频接口\n\n工业设计 (Design)\n机身材质: 航空级铝合金一体成型 / 钢化玻璃背板\n视觉风格: 四边等宽超窄边框\n支架功能: \"M-Lift\" 灵动支架 (支持 150mm 升降 / -5°~35° 俯仰) / 支持 90° 垂直旋转 (自动识别重力感应切换 UI) / 兼容 VESA 75mm 标准壁挂\n\n特色功能 (Special Features)\nDesignOS 2L Link: 专为手机 Linux 模式优化的显示引擎，支持像素级 1:1 映射。\nDesignDex 快速启动: 接入 USB-C 接口后，0.5秒内自动激活手机内置的桌面模式。\n护眼技术: 硬件级低蓝光面板 + 全亮度 DC 调光。\n智能感光: 内置环境光传感器，根据房间光线自动调节亮度和色温。\n一键切换: 机身侧边设有专用的 \"D-Button\"，可在手机 Dex 模式和电脑信号源之间快速无缝切换。\n\n零售价: 4599\n首销优惠价: 4299\nDesignPhone 加购价: 3699"
+    },
+    {
+      "name": "DesignDisplay X1 Plus",
+      "specs": "DesignDisplay X1 Plus\n定位: 27 英寸 4K IJP-OLED 顶级桌面工作站中心\n\n核心参数\n面板类型: 华星光电 (CSOT) IJP-OLED (印刷 OLED)\n屏幕尺寸: 27.0 英寸\n分辨率: 3840 × 2160 (4K UHD)\n刷新率: 165Hz (支持 MORO ProSync 自适应刷新技术)\n色彩素质: 真 10-bit / 100% DCI-P3 / 99% Adobe RGB\n色彩精准度:  (专业级出厂逐台校色)\n峰值亮度: 1200 nits (HDR) / 600 nits (典型)\n响应时间: 0.03ms (GtG)\n\n补给与无线能力\n底座无线充: 集成 Qi2 磁吸无线快充模块，支持最高 25W 无线输出 (兼容 DesignPhone 全系列及 Qi2 协议设备)。\n有线反向供电: 全功能 USB-C 支持 PD 3.1 (240W EPR)，可直接驱动高性能游戏本或工作站。\n\n顶级连接性 (Connectivity)\n雷电接口: 3 × Thunderbolt 5 (支持 80Gbps/120Gbps 带宽，支持三屏菊花链串联)。\n网络接口: 1 × 10GbE (万兆网口)，接入手机后可为 DesignOS 2L 提供极速有线背板。\n视频接口: 1 × DisplayPort 2.1 (UHBR20) / 1 × HDMI 2.1 (48Gbps)。\n数据接口: 4 × USB-A (3.2 Gen2) / 1 × SD 4.1 (UHS-III) 读卡器 (侧边)。\n\n生态特性\nDesignDex 2.0: 接入手机后 0.3 秒唤醒桌面模式，UI 针对 27 寸物理面积优化。\nD-Button: 侧边物理快捷键，一键切换手机系统与外接 PC 信号。\nM-Lift Pro 支架: 支持 150mm 升降、-5°~35° 俯仰、以及 90° 垂直旋转（UI 自动适配）。\n\n价格信息\n官方零售价: 5999\n首销价: 5499\nDesignPhone 加购价：4999"
+    }
+  ],
+  "DesignPad Series": [],
+  "SEKAI Phone": [
+    {
+      "name": "SEKAI Phone",
+      "specs": "Model Name: DesignPhone SEKAI Phone\nModel Code: MRDSPH26SK\nCPU: Design K2 Mobile / 由MORO自主研发的Design K系列第二代移动平台\nNPU: Design AI Boost Pro Mobile\nRAM / ROM: LPDDR5X / UFS 4.1\nUSB 3.2 Gen 1\nBattery Capacity: 7500mAh\nWeight: 197g\nDisplay: LG Q3+ LTPO OLED / 1.5K 144Hz\nScreen Size: 6.5 inch\nWired Charging Power: 120W\nWireless Charging Power: 45W\nReverse Wired Charging: 20W\n\nMain Camera: ISOCELL HP3 (1/1.4 inch / 200MP)\nWide Camera: Sony IMX600 (1/2 inch / 50MP)\nTelephoto Camera: OmniVision OVA0B (1/1.8 inch /50MP)\nFront Camera: Samsung ISOCELL JN5 (1/2.76 inch / 50MP)\n\n防水防尘等级: IP65 / IP68\n\nOperating System: DesignOS 2 (Based on Android 16)\n\n\n价格\n12G+256GB: 3499\n12G+512GB: 3699\n16G+512GB: 3899\n16G+1TB: 3999\n购买 DesignPhone SEKAI Phone：送“Project SEKAI 礼盒”（Design Free Max 耳机 + Project SEKAI 定制保温杯 + 15W无线充电器 + 队长吧唧一套(6个)）"
+    }
+  ]
+}

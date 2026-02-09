@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignPhone 产品库管理</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Google Sans"', 'Inter', '"Noto Sans SC"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#e0eaf5',
+                            100: '#b3cce6',
+                            200: '#80abd6',
+                            300: '#4d8ac6',
+                            400: '#2670ba',
+                            500: '#0056ae', // Main Deep Blue
+                            600: '#004b99',
+                            700: '#003d80',
+                            800: '#002f66',
+                            900: '#00224d',
+                        },
+                        surface: {
+                            light: '#fdfbff',
+                            dark: '#0e1216',
+                            variant: '#e1e3e8',
+                            darkVariant: '#40464f'
+                        }
+                    },
+                    boxShadow: {
+                        'm3-1': '0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3)',
+                        'm3-2': '0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3)',
+                        'm3-3': '0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s cubic-bezier(0.2, 0.0, 0, 1.0) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        /* Material 3 Expressive Transitions */
+        .transition-expressive {
+            transition: all 400ms cubic-bezier(0.2, 0.0, 0, 1.0);
+        }
+
+        .specs-text {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        /* Sidebar transition */
+        #main-sidebar {
+            transition: margin-left 0.4s cubic-bezier(0.2, 0, 0, 1), transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+        }
+        
+        .sidebar-closed #main-sidebar {
+            margin-left: -20rem; /* -w-80 */
+        }
+
+        /* Staggered Animation Delays */
+        .stagger-1 { animation-delay: 50ms; }
+        .stagger-2 { animation-delay: 100ms; }
+        .stagger-3 { animation-delay: 150ms; }
+        .stagger-4 { animation-delay: 200ms; }
+        .stagger-5 { animation-delay: 250ms; }
+        .stagger-6 { animation-delay: 300ms; }
+
+        /* Dialog Backdrop Blur */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px); /* Gaussian Blur */
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Dialog Entry Animation */
+        dialog[open] #dialog-panel {
+            animation: dialogEnter 0.4s cubic-bezier(0.2, 0.0, 0, 1.0) forwards;
+        }
+
+        @keyframes dialogEnter {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark text-slate-800 dark:text-slate-100 min-h-screen flex flex-col md:flex-row overflow-hidden transition-colors duration-300">
+
+    <!-- Navigation Drawer (Sidebar) -->
+    <aside id="main-sidebar" class="w-full md:w-80 bg-slate-50 dark:bg-[#15191f] flex-shrink-0 border-r border-slate-200 dark:border-slate-800 flex flex-col h-screen z-20 md:relative absolute md:translate-x-0 transition-transform md:transition-all -translate-x-full">
+        <div class="p-6 pb-2">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-rounded text-primary-500 text-3xl">devices</span>
+                    <h1 class="text-xl font-bold tracking-tight text-primary-900 dark:text-primary-100">DesignPhone</h1>
+                </div>
+                <div class="flex items-center gap-1">
+                    <button onclick="toggleTheme()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="切换主题">
+                        <span class="material-symbols-rounded" id="theme-icon">dark_mode</span>
+                    </button>
+                    <!-- Sidebar Collapse Button (Desktop) -->
+                    <button onclick="toggleSidebar()" class="hidden md:flex w-10 h-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="收起侧边栏">
+                        <span class="material-symbols-rounded">first_page</span>
+                    </button>
+                     <!-- Sidebar Close Button (Mobile) -->
+                     <button onclick="toggleSidebar()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <span class="material-symbols-rounded">close</span>
+                    </button>
+                </div>
+            </div>
+            <button onclick="openAddSeriesModal()" class="w-full flex items-center justify-center gap-2 bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100 py-4 rounded-2xl hover:brightness-95 transition-expressive font-medium mb-4 shadow-sm">
+                <span class="material-symbols-rounded">add</span>
+                新建系列
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto px-4 pb-4 space-y-1" id="series-list">
+            <!-- Series items will be injected here -->
+        </nav>
+
+        <!-- Import/Export Footer -->
+        <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-800/50">
+            <div class="flex gap-2">
+                <button onclick="exportData()" class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="导出为 .dslib 文件">
+                    <span class="material-symbols-rounded text-lg">download</span>
+                    导出
+                </button>
+                <button onclick="triggerImport()" class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="导入 .dslib 文件">
+                    <span class="material-symbols-rounded text-lg">upload</span>
+                    导入
+                </button>
+                <input type="file" id="import-file" accept=".dslib" class="hidden" onchange="importData(this)">
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative w-full">
+        <!-- Top Bar -->
+        <header class="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md z-10 sticky top-0">
+            <div class="flex items-center gap-4">
+                <!-- Sidebar Toggle Button (Visible when sidebar is closed on Desktop, or always on Mobile) -->
+                <button id="sidebar-open-btn" onclick="toggleSidebar()" class="w-10 h-10 flex md:hidden items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300">
+                    <span class="material-symbols-rounded">menu</span>
+                </button>
+                <span class="font-bold text-lg md:hidden" id="mobile-header-title">产品列表</span>
+            </div>
+        </header>
+
+        <!-- Product Grid -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8" id="product-container">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-8 animate-fade-in-up">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-normal text-slate-900 dark:text-white" id="current-series-title">DesignKids Series</h2>
+                        <p class="text-slate-500 dark:text-slate-400 mt-2">管理该系列下的所有机型配置</p>
+                    </div>
+                    <button onclick="openAddDeviceModal()" class="hidden md:flex items-center gap-2 bg-primary-500 text-white px-6 py-3 rounded-full hover:bg-primary-600 shadow-m3-1 hover:shadow-m3-2 transition-expressive">
+                        <span class="material-symbols-rounded">add</span>
+                        添加机型
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="device-grid">
+                    <!-- Cards will be injected here -->
+                </div>
+                
+                <!-- Spacer for FAB on mobile -->
+                <div class="h-24 md:hidden"></div>
+            </div>
+        </div>
+
+        <!-- Mobile FAB -->
+        <button onclick="openAddDeviceModal()" class="md:hidden absolute bottom-6 right-6 w-14 h-14 bg-primary-500 text-white rounded-2xl shadow-m3-3 flex items-center justify-center z-30 animate-fade-in-up stagger-3">
+            <span class="material-symbols-rounded">add</span>
+        </button>
+    </main>
+
+    <!-- Dialog: Add/Edit/View Device -->
+    <dialog id="device-dialog" class="bg-transparent p-0 w-full h-full md:w-auto md:h-auto backdrop:backdrop-blur-md z-50">
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-surface-light dark:bg-[#1e2329] dark:text-slate-100 w-full max-w-2xl rounded-[28px] shadow-2xl flex flex-col max-h-[90vh] overflow-hidden transition-expressive scale-95 opacity-0 open:scale-100 open:opacity-100" id="dialog-panel">
+                <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                    <h3 class="text-2xl font-semibold" id="dialog-title">编辑机型</h3>
+                    <button onclick="closeDeviceDialog()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-100 transition-colors">
+                        <span class="material-symbols-rounded">close</span>
+                    </button>
+                </div>
+                
+                <div class="p-6 overflow-y-auto space-y-4 flex-1">
+                    <input type="hidden" id="device-id">
+                    
+                    <!-- Series Select -->
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-primary-500">所属系列</label>
+                        <div class="relative">
+                            <select id="device-series" class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl p-3 pr-10 focus:ring-2 focus:ring-primary-500 outline-none transition-all text-slate-900 dark:text-slate-100 appearance-none cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
+                                <!-- Options will be injected via JS -->
+                            </select>
+                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                                <span class="material-symbols-rounded">arrow_drop_down</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-primary-500">机型名称</label>
+                        <input type="text" id="device-name" class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl p-3 focus:ring-2 focus:ring-primary-500 outline-none transition-all text-slate-900 dark:text-slate-100 read-only:cursor-default" placeholder="例如: DesignPhone S1">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-primary-500">详细配置</label>
+                        <textarea id="device-specs" rows="12" class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl p-3 focus:ring-2 focus:ring-primary-500 outline-none transition-all text-sm leading-relaxed text-slate-900 dark:text-slate-100 read-only:cursor-default" placeholder="在此输入 CPU, 屏幕, 电池等详细参数..."></textarea>
+                    </div>
+                </div>
+
+                <div class="p-6 border-t border-slate-100 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-[#15191f]">
+                    <button onclick="closeDeviceDialog()" class="px-5 py-2.5 text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors">关闭</button>
+                    <button id="dialog-save-btn" onclick="saveDevice()" class="px-6 py-2.5 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-full shadow-lg transition-colors">保存</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Add Series -->
+    <dialog id="series-dialog" class="bg-transparent p-0 w-full md:w-auto backdrop:backdrop-blur-md z-50">
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-surface-light dark:bg-[#1e2329] dark:text-slate-100 w-full max-w-md rounded-[28px] shadow-2xl p-6" id="series-dialog-panel">
+                <h3 class="text-xl font-bold mb-4">新建产品系列</h3>
+                <input type="text" id="new-series-name" class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl p-3 mb-6 focus:ring-2 focus:ring-primary-500 outline-none text-slate-900 dark:text-slate-100" placeholder="例如: Tablet Series">
+                <div class="flex justify-end gap-2">
+                    <button onclick="document.getElementById('series-dialog').close()" class="px-4 py-2 text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full">取消</button>
+                    <button onclick="addNewSeries()" class="px-5 py-2 bg-primary-500 text-white font-medium rounded-full">创建</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Dialog: Confirm -->
+    <dialog id="confirm-dialog" class="bg-transparent p-0 w-full md:w-auto backdrop:backdrop-blur-md z-50">
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div id="confirm-panel" class="bg-surface-light dark:bg-[#1e2329] dark:text-slate-100 w-full max-w-sm rounded-[28px] shadow-2xl p-6 flex flex-col gap-4 scale-95 opacity-0 transition-expressive">
+                <div>
+                    <span class="material-symbols-rounded text-4xl text-slate-400 mb-2">info</span>
+                    <h3 class="text-xl font-bold">确认操作</h3>
+                </div>
+                <p id="confirm-message" class="text-slate-600 dark:text-slate-300 leading-relaxed">确定要执行此操作吗？</p>
+                <div class="flex justify-end gap-2 mt-2">
+                    <button id="confirm-cancel-btn" class="px-5 py-2.5 text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors">取消</button>
+                    <button id="confirm-ok-btn" class="px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-full shadow-lg transition-colors">确认</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 bg-slate-800 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-xl transition-all duration-300 opacity-0 -translate-y-4 pointer-events-none z-[60] font-medium flex items-center gap-2">
+        <span class="material-symbols-rounded text-green-400 dark:text-green-600 text-lg">check_circle</span>
+        <span id="toast-message">操作成功</span>
+    </div>
+
+    <script>
+        // --- Data Initialization ---
+        const initialData = {
+            "DesignPhone Series": [
+                 {
+                    name: "DesignPhone 2",
+                    specs: `型号名称: DesignPhone 2
+型号代码: MRDSPH0201
+
+CPU
+Design K3 Mobile / 由MORO自主研发的Design K系列第三代移动平台
+NPU: Design AI Boost 2 Mobile
+
+屏幕: 三星 M14 Pro OLED屏幕 / MORO LTPO+ 1-165Hz 1.5K / 6.3英寸
+
+电池容量: 8000mAh
+充电: 120W有线 80W无线 22.5W无线反充 30W有线反向充电
+
+内存/闪存: LPDDR5X + UFS 4.1 Ultra
+USB3.2 Gen 2
+重量: 189g
+
+系统
+DesignOS 3 (Based on Android 17)
+DesignOS 3L (Based on Linux)
+
+Main Camera: Samsung ISOCELL HP2 (1/1.3", 200MP)
+Ultra-Wide Camera: Sony LYTIA LYT-600 (1/1.95", 50MP)
+Telephoto Camera: OmniVision OVA0B (1/1.8", 100MP)
+Front Camera: Samsung ISOCELL JN5 (1/2.76", 50MP)
+
+价格
+12G+256GB: 3599
+12G+512GB: 3899
+16G+512GB: 4099
+16G+1TB: 4499`
+                 },
+                 {
+                    name: "DesignPhone 2 Pro",
+                    specs: `型号名称: DesignPhone 2 Pro
+型号代码: MRDSPH0202
+
+CPU
+第六代骁龙®8至尊版移动平台
+NPU: Design AI Boost 2 Pro Mobile
+
+屏幕: LG Q5 Max OLED屏幕 / 165Hz 2K / 6.3英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)
+背屏: 华星光电 O1 Max / MORO LTPO+ 自适应刷新率技术(1~165Hz) / 2.15 英寸
+
+电池容量: 7600mAh
+充电: 120W有线 80W无线 30W无线反充 35W有线反充
+
+内存/闪存: LPDDR6 + UFS 4.1 Pro
+USB3.2 Gen2
+重量: 199g
+
+系统
+DesignOS 3 (Based on Android 17)
+DesignOS 3L (Based on Linux)
+
+Main Camera: Sony LYT-901 (1/1.12", 200MP)
+Ultra-Wide Camera: OV OVA0B (1/1.8", 100MP)
+Telephoto Camera: 200MP: Samsung HP9 (1/1.4", 200MP)
+Front Camera: Sony LYTIA LYT-500 (1/2.9", 50MP)
+
+价格
+12G+256GB: 4399
+12G+512GB: 4699
+16G+512GB: 4999
+16G+1TB: 5399`
+                 },
+                 {
+                    name: "DesignPhone 2 Pro+",
+                    specs: `型号名称: DesignPhone 2 Pro+
+型号代码: MRDSPH0203
+
+CPU
+第六代骁龙®8至尊版移动平台
+NPU: Design AI Boost 2 Pro Mobile
+
+屏幕: LG Max 2 双层OLED屏幕 / MORO LTPO+ 自适应刷新率技术(1~165Hz) / 165Hz / 6.9英寸
+背屏: 华星光电 O1 Max / MORO LTPO+ 自适应刷新率技术(1~165Hz) / 2.42 英寸
+
+电池容量: 9000mAh
+充电: 100W有线 80W无线 40W无线反充 45W有线反充
+
+
+内存/闪存: LPDDR6 + UFS 4.1 Pro
+USB3.2 Gen2
+重量: 221g
+
+系统
+DesignOS 3 (Based on Android 17)
+DesignOS 3L (Based on Linux)
+
+Main Camera: Sony LYT-901 (1/1.12", 200MP)
+Ultra-Wide Camera: OV OVA0B (1/1.8", 100MP)
+Telephoto Camera: 200MP: Samsung HP9 (1/1.4", 200MP)
+Front Camera: Sony LYTIA LYT-500 (1/2.9", 50MP)
+
+价格
+12G+256GB: 4999
+12G+512GB: 5399
+16G+512GB: 5699
+16G+1TB: 6299`
+                 }
+            ],
+            "M Series": [
+                {
+                    name: "DesignPhone M1C",
+                    specs: `型号名称: DesignPhone M1C
+型号代码: MRDSPHMM03
+
+CPU
+高通骁龙685 (5G Edition)
+屏幕: LCD / 90Hz 720P
+
+电池容量: 4500mAh
+充电: 22.5W有线
+
+内存/闪存: LPDDR4 + UFS 2.2
+USB2.0
+重量: 189g
+
+系统: DesignOS 2 (Based on Android 15)
+
+价格
+4G+64GB: 599
+6G+64GB: 649
+6G+128GB: 799
+8G+128GB: 849
+8G+256GB: 999`
+                },
+                {
+                    name: "DesignPhone M1",
+                    specs: `型号名称: DesignPhone M1
+型号代码: MRDSPHMM01
+
+CPU
+Design B1 Mobile / 由MORO自主研发的Design B系列第一代移动平台（三星12nm工艺）
+NPU: Design AI Boost Minus Mobile
+
+屏幕: LCD / 120Hz 720P / 6.7英寸
+
+电池容量: 6000mAh
+充电: 45W有线+10W有线反向充电
+
+内存/闪存: LPDDR4 + UFS 2.2
+USB2.0
+重量: 214g
+
+系统: DesignOS 2 (Based on Android 15)
+
+价格
+8G+128GB: 799
+8G+256GB: 999`
+                },
+                {
+                    name: "DesignPhone M1S",
+                    specs: `型号名称: DesignPhone M1S
+型号代码: MRDSPHMM02
+
+CPU
+Design B1 Pro Mobile / 由MORO自主研发的Design B系列第一代移动平台增强版（中芯国际8nm工艺）
+NPU: Design AI Boost Mobile
+
+屏幕: 天马 OLED / 120Hz 1080P / 6.9英寸
+
+电池容量: 6500mAh
+充电: 65W有线 + 10W有线反向充电（需要 USB-C to USB-C 数据线）
+
+内存/闪存: LPDDR4 + UFS 3.1
+USB2.0
+重量: 205g
+
+支持红外
+防水防尘等级：IP68
+
+系统: DesignOS 2 (Based on Android 16)
+
+价格
+8G+256GB: 1399
+12G+256GB: 1699
+12G+512GB: 1999`
+                }
+            ],
+            "H Series": [
+                {
+                    name: "DesignPhone H26",
+                    specs: `型号名称: DesignPhone H26
+型号代码: MRDSPH2600
+
+CPU
+Design H2 Mobile / 由MORO自主研发的Design H系列第二代移动平台
+NPU: Design AI Boost Mobile
+
+屏幕: 天马 OLED屏幕 / 144Hz 1080P / 6.36英寸
+
+电池容量: 7000mAh
+充电: 80W有线 30W无线 20W有线反向充电
+
+内存/闪存: LPDDR5 + UFS 3.2 Pro
+USB 2.0
+重量: 197g
+
+防水防尘等级: IP54 / IP65
+
+Main Camera: Sony LYT-600 (1/1.95 inch / 50MP)
+Wide Camera: Sony IMX563 (1/2.55 inch / 12MP)
+Front Camera: OmniVision OV50D (1/2.88 inch / 50MP)
+
+系统: DesignOS 2 (Based on Android 16)
+
+价格
+12G+256GB: 2199
+12G+512GB: 2499
+16G+512GB: 2699
+购买 H26 标准版：送“移动生活礼包”（Design Free 耳机 + 保温杯）`
+                },
+                {
+                    name: "DesignPhone H26 Pro",
+                    specs: `Model Name: DesignPhone H26 Pro
+Model Code: MRDSPH2601
+CPU: Design H2 Pro Mobile / 由MORO自主研发的Design H系列第二代移动平台增强版
+NPU: Design AI Boost Mobile
+RAM / ROM: LPDDR5 / UFS 4.0
+USB 3.1
+Battery Capacity: 7500mAh
+Weight: 201g
+Display: 京东方 X2P LTPS OLED / 1.5K 144Hz
+Screen Size: 6.5 inch
+Wired Charging Power: 120W
+Wireless Charging Power: 45W
+Reverse Wired Charging: 20W
+
+Main Camera: ISOCELL HP3 (1/1.4 inch / 200MP)
+Wide Camera: Sony IMX582 (1/2 inch / 48MP)
+Front Camera: Samsung ISOCELL JN5 (1/2.76 inch / 50MP)
+
+防水防尘等级: IP65 / IP68
+
+Operating System: DesignOS 2 (Based on Android 16)
+
+价格
+12G+256GB: 2999
+12G+512GB: 3299
+16G+512GB: 3599
+16G+1TB: 3999
+购买 H26 Pro：送“全能旗舰礼包”（Design Free Plus 耳机 + 保温杯 + 15W无线充电器）`
+                }
+            ],
+            "Turbo Series": [
+                {
+                    name: "DesignPhone Turbo",
+                    specs: `Model Name: DesignPhone Turbo
+Model Code: MRDSPHTU10
+CPU: Design K1 Turbo Mobile Platform / 由MORO自主研发的Design K系列第一代移动平台游戏版
+GPU: Design Graphic Master Mobile
+NPU: Design AI Boost Mobile
+RAM / ROM: LPDDR5 / UFS 4.0
+USB 3.2
+Battery Capacity: 8500 mAh
+Weight: 223g
+Display Panel Type: BOE T2+ OLED
+Refresh Rate: MORO LTPS 144Hz
+Screen Size: 6.83 inch
+Wired Charging Power: 100W
+Wireless Charging Power: 65W
+Reverse Wired Charging: 30W
+
+Main Camera: LYT-600 (50MP)
+Telephoto Camera: IMX858 (50MP)
+Ultra-Wide Camera: OV13B10 (42MP）
+
+12G+256GB: 2199
+12G+512GB: 2599
+16G+512GB: 2899`
+                },
+                {
+                    name: "DesignPhone Turbo Pro",
+                    specs: `Model Name: DesignPhone Turbo Pro
+Model Code: MRDSPHTU11
+CPU: Snapdragon 8 Elite
+GPU: Design Graphic Master Pro Mobile
+NPU: Design AI Boost 2 Mobile
+RAM / ROM: LPDDR5X / UFS 4.0
+USB 3.2
+Battery Capacity: 9000 mAh
+Weight: 227g
+Display Panel Type: CSOT E9 Pro OLED
+Refresh Rate: MORO LTPO+ Adaptive Refresh Rate Technology (1–165Hz)
+Screen Size: 6.9 inch
+Wired Charging Power: 120W
+Wireless Charging Power: 65W
+Reverse Wired Charging: 30W
+
+Main Camera: OV50R (50MP)
+Telephoto Camera: LYT-601 (50MP)
+Ultra-Wide Camera: JN1 (42MP）
+
+12G+256GB: 2699
+12G+512GB: 2899
+16G+512GB: 3199
+16G+1TB: 3699
+
+H26系列-线下走量机，Turbo系列-线上性价比`
+                }
+            ],
+            "S Series": [
+                {
+                    name: "DesignPhone S1",
+                    specs: `型号名称: DesignPhone S1
+型号代码: MRDSPHS1CC
+
+CPU
+Design K2 Mobile / 由MORO自主研发的Design K系列第二代移动平台
+NPU: Design AI Boost Mobile
+
+屏幕: LG Q3+ OLED屏幕 / MORO LTPO+ 1-144Hz 1.5K / 6.3英寸
+
+电池容量: 7000mAh
+充电: 100W有线 60W无线 22.5W无线反充 27W有线反向充电
+
+内存/闪存: LPDDR5X + UFS 4.1
+USB3.2 Gen 2
+重量: 182g
+
+系统: DesignOS 2 (Based on Android 16)
+
+Main Camera: OmniVision OV50H (1/1.3 inch / 100MP)
+Ultra-Wide Camera: Sony LYT-600 (1/1.95 inch / 50MP)
+Telephoto Camera: Samsung ISOCELL GN3 (1/1.56 inch / 50MP)
+Front Camera: ISOCELL JN5 (1/2.76 inch / 50MP)
+
+价格
+12G+256GB: 3499
+12G+512GB: 3799
+16G+512GB: 3999
+16G+1TB: 4399
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599
+加购DesignDisplay X1s 显示器仅需¥2999`
+                },
+                {
+                    name: "DesignPhone S1 Pro",
+                    specs: `型号名称: DesignPhone S1 Pro
+型号代码: MRDSPHS1PC
+
+CPU
+第五代骁龙®8至尊版移动平台
+NPU: Design AI Boost Pro Mobile
+
+屏幕: LG Q4 Max OLED屏幕 / 165Hz 2K / 6.3英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)
+
+电池容量: 7200mAh
+充电: 100W有线 65W无线 20W无线反充 27W有线反充
+
+内存/闪存: LPDDR5X + UFS 4.1 Pro
+USB3.2 Gen2
+重量: 190g
+
+系统: DesignOS 2 (Based on Android 16)
+
+Main Camera: ISOCELL HP3 (1/1.4 inch / 200MP)
+Ultra-Wide Camera: Sony LYT-701 (1/1.95 inch / 50MP)
+Telephoto Camera: OmniVision OVA0B (1/1.8 inch / 100MP)
+Front Camera: ISOCELL JN5 (1/2.76 inch / 50MP)
+
+价格
+12G+256GB: 3999
+12G+512GB: 4299
+16G+512GB: 4499
+16G+1TB: 4999
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599
+加购DesignDisplay X1s 显示器仅需¥2999`
+                },
+                {
+                    name: "DesignPhone S1 Pro+",
+                    specs: `型号名称: DesignPhone S1 Pro+
+型号代码: MRDSPHS1PPS
+
+CPU
+第五代骁龙®8至尊版移动平台
+NPU: Design AI Boost Pro Mobile
+
+屏幕: 三星 M14 OLED屏幕 / 165Hz 2K / 6.9英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)
+
+电池容量: 7500mAh
+充电: 100W有线 80W无线 25W无线反充 27W有线反充
+
+
+内存/闪存: LPDDR5X + UFS 4.1 Pro
+USB3.2 Gen2
+重量: 210g
+
+系统: DesignOS 2 (Based on Android 16)
+
+Main Camera: ISOCELL HP2 (1/1.3 inch / 200MP)
+Ultra-Wide Camera: Sony LYT-701 (1/1.56 inch / 50MP)
+Telephoto Camera: OmniVision OVA0B (1/1.8 inch / 100MP)
+Front Camera: ISOCELL JN5 (1/2.76 inch / 50MP)
+
+价格
+12G+256GB: 4499
+12G+512GB: 4799
+16G+512GB: 4999
+16G+1TB: 5499
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599
+加购DesignDisplay X1s 显示器仅需¥2999`
+                },
+                {
+                    name: "DesignPhone S1 Ultra",
+                    specs: `型号名称: DesignPhone S1 Ultra
+型号代码
+MRDSPHS1UD (Design处理器版)
+MRDSPHS1US (高通骁龙处理器版)
+
+CPU
+Design K2 Pro Mobile / 由MORO自主研发Design K系列第二代移动平台增强版 (台积电3nm)
+第五代骁龙®8至尊领先版移动平台
+NPU: Design AI Boost 2 Mobile
+GPU: Design Graphic Master Pro Mobile
+
+屏幕: LG Max 2 双层OLED屏幕 / 165Hz 2K / 6.9英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)
+
+电池容量: 7200mAh
+充电: 140W有线 80W无线 25W无线反充 30W有线反充
+
+内存/闪存: LPDDR5X + UFS 4.1 Pro
+USB3.2 Gen2
+重量: 223g
+
+系统
+DesignOS 2 (Based on Android 16)
+DesignOS 2L (Based on Linux)
+
+Main Camera: Samsung ISOCELL HP2 (1/1.3 inch / 200MP)
+Periscope Telephoto: Samsung ISOCELL HP3 (1/1.4 inch / 200MP)
+Ultra-Wide Camera: OmniVision OVA0B (1/1.8 inch / 100MP)
+Front Camera: Sony LYT-500 (Design Vision F1) (1/2.51 inch / 50MP)
+
+价格
+12G+512GB: 6499
+16G+512GB: 6799
+16G+1TB: 7399
+24G+1TB: 7999
+24G+2TB: 8699
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3499
+加购DesignDisplay X1s 显示器仅需¥2999`
+                }
+            ],
+            "Special Series": [
+                {
+                    name: "DesignPhone SP 2026",
+                    specs: `A MORO & Intel COLLABORATION
+CO-ENGINEERED WITH FUJIFILM
+SILICON BY Intel Foundry 18A
+
+型号名称: DesignPhone SP 2026
+型号代码: MRDSPHSP26
+
+CPU: Design K2 Special Mobile / 由MORO自主研发Design K系列第二代移动平台特别版 (Intel 18A For ARM工艺)
+NPU: Design AI Boost Pro Mobile
+
+屏幕: LG Q4+ OLED屏幕 / 165Hz 2K / 6.9英寸 / MORO LTPO+ 自适应刷新率技术(1~165Hz)
+
+电池容量: 7600mAh
+充电: 120W有线 80W无线 25W无线反充 27W有线反充
+
+内存/闪存: LPDDR5X + UFS 4.1 Pro
+USB3.2 Gen2
+重量: 218g
+
+系统
+DesignOS 2 (Based on Android 16)
+DesignOS 2L (Based on Linux)
+
+Main Camera: ISOCELL HP2 (1/1.3 inch / 200MP)
+Ultra-Wide Camera: Sony LYT-701 (1/1.56 inch / 50MP)
+Telephoto Camera: OmniVision OVA0B (1/1.8 inch / 100MP)
+Front Camera: Sony LYT-500 (Design Vision F1) (1/2.51 inch / 50MP)
+
+价格
+16G+512GB: 7599
+16G+1TB: 8299
+24G+1TB: 8999
+24G+2TB: 10299
+SP 顶配捆绑包 (24GB+1TB 手机+DesignDisplay 23英寸 4K 165Hz OLED 显示器): 12999
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3499
+加购DesignDisplay X1s 显示器仅需¥2999`
+                },
+                {
+                    name: "FUJI Phone 2",
+                    specs: `Model Name: FUJI Phone 2
+Model Code: MRFJPHGL02
+CPU: Snapdragon 8 Elite Gen 5
+GPU: Design Graphic Master Pro Mobile
+NPU: Design AI Boost 2 Pro Mobile
+RAM / ROM: LPDDR5X / UFS 4.1 Pro
+Battery Capacity: 6700 mAh
+Weight: 238.2g
+Display Panel Type: Samsung M14 Pro OLED
+Refresh Rate: MORO LTPO+ Adaptive Refresh Rate Technology (1–144Hz)
+Screen Size: 6.9 inch
+Rear Display: 1.76 inch
+Resolution: 2608 x 1204
+Wired Charging Power: 120W
+Wireless Charging Power: 65W
+Reverse Wireless Charging: 22.5W
+Reverse Wired Charging: 30W
+
+Main Camera: LYT-901 (1 inch, 200MP)
+Telephoto Camera: Samsung ISOCELL HP9T (1/1.4 inch, 200MP)
+Ultra-Wide Camera: OmniVision OVA0B (1/1.8 inch, 100MP）
+Front Camera: Design Vision F1 (LYT-500 / Pro Vlog Sensor) (1/2.51 inch, 50MP)
+LiDAR Scanner: Sony SPAD F1 + VCSEL X1 Pro LiDAR System
+Supports 10-bit High Bitrate Video and Advanced Log Recording (equivalent to pro-level workflows)
+
+Operating System: DesignOS 2 For FUJI (Based on Android 16)
+
+12GB + 512GB / 6,999 CNY / 1,399 USD / 1,599 EUR / 214,800 JPY
+16GB + 512GB / 7,499 CNY / 1,499 USD / 1,699 EUR / 229,800 JPY
+16GB + 1TB / 8,499 CNY / 1,699 USD / 1,899 EUR / 259,800 JPY
+16GB + 2TB / 10,499 CNY / 2,099 USD / 2,299 EUR / 319,800 JPY
+24GB + 1TB / 9,299 CNY / 1,849 USD / 2,049 EUR / 281,800 JPY
+24GB + 2TB / 11,299 CNY / 2,249 USD / 2,449 EUR / 341,800 JPY
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3499
+加购DesignDisplay X1s 显示器仅需¥2999`
+                },
+                {
+                    name: "DesignPhone Aero",
+                    specs: `Model Name: DesignPhone Aero
+Model Code: MRDSPHAR01
+CPU: Design K2 Pro Mobile / 由MORO自主研发的Design K系列第二代移动平台增强版
+NPU: Design AI Boost 2 Pro Mobile
+RAM / ROM: LPDDR5X / UFS 4.1 Pro
+Battery Capacity: 5800mAh
+Thickness: 5.86mm
+Weight: 164g
+Display : LG Q3 For Slim OLED / MORO LTPO+ Adaptive Refresh Rate Technology (1–165Hz) / 6.7 inch 1.5K
+Wired Charging Power: 90W
+Wireless Charging Power: 45W
+
+Main Camera: ISOCELL HP9 (1/1.4inch / 200MP)
+Telephoto Camera: Sony IMX882 (50MP)
+Front Camera: ISOCELL JN5 (1/2.76 inch / 50MP)
+
+Operating System: DesignOS 2 (Based on Android 16)
+
+12+256 4699
+12+512 4999
+16+512 5299
+16+1TB 5699
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3599
+加购DesignDisplay X1s 显示器仅需¥2999`
+                },
+                {
+                    name: "DesignPhone Fold",
+                    specs: `Model Name: DesignPhone Fold
+Model Code: MRDSPHFD00
+CPU: Design K2 Pro Mobile / 由MORO自主研发的Design K系列第二代移动平台增强版
+NPU: Design AI Boost 2 Pro Mobile
+GPU: Design Graphic Master Pro Mobile
+RAM / ROM: LPDDR5X / UFS 4.1 Pro
+Battery Capacity: 6320mAh
+Main Display: 8.5-inch LG Q3 Pro OLED For Fold (2480 x 2200, MORO LTPO+ 1–144Hz, 2800 nits)
+Cover Display: 6.9-inch Samsung M14 Plus AMOLED (19.5:9, 2844 x 1312, MORO LTPO+ 1–144Hz)
+Dimensions (Unfolded): 163.5 x 156.8 x 4.2 mm
+Dimensions (Folded): 163.5 x 77.2 x 8.6 mm
+Weight: 238g
+Wired Charging Power: 120W
+Wireless Charging Power: 45W
+
+Main Camera: LYT-818 (1/1.28 inch / 50MP)
+Telephoto Camera: ISOCELL JN5 (1/2.76 inch / 50MP)
+Ultra-Wide Camera: ISOCELL JN1 (1/2.76 inch / 50MP)
+Front Camera: ISOCELL JN5 (1/2.76 inch / 50MP)
+
+Operating System: DesignOS 2 (Based on Android 16)
+
+12G+512GB: 8999
+16G+512GB: 9699
+16G+1TB: 10499
+24G+1TB: 10999
+24G+2TB: 12699
+任意版本加购DesignDisplay X1 显示器(华星光电面板)仅需¥3299
+加购DesignDisplay X1s 显示器仅需¥2799`
+                }
+            ],
+            "DesignKids Series": [
+                {
+                    name: "DesignKidsPhone",
+                    specs: `Model Name: DesignKidsPhone
+Model Code: MRDSKPH0000
+CPU: Snapdragon® 7s Gen 2 Mobile Platform
+
+RAM / ROM: LPDDR4X / UFS 3.1
+Battery Capacity: 3860mAh
+Display: 5.4-inch BOE LCD / 1920x1080, 90Hz
+Weight: 128g
+Wired Charging Power: 35W
+
+Back Cover: High-strength matte polycarbonate
+Mid-frame: High-strength reinforced plastic with internal metal bracket
+Cover Glass: Strengthened aluminosilicate glass
+
+Operating System: DesignKidsOS 1 (Based on Android 15)
+
+6+128: 699
+8+128: 799
+8+256: 949`
+                },
+                {
+                    name: "DesignKidsPhone Pro",
+                    specs: `Model Name: DesignKidsPhone Pro
+Model Code: MRDSKPH000P
+CPU: Snapdragon® 7+ Gen 2 Mobile Platform
+
+RAM / ROM: LPDDR4X / UFS 3.2
+Battery Capacity: 4200mAh
+Display: 5.4-inch BOE OLED / 1.2K, 120Hz
+Weight: 147g
+Wired Charging Power: 65W
+
+Body Materials: AG frosted glass back cover + sandblasted aluminum alloy frame
+Special Hardware: Action Button
+
+Main Camera: OV50E (50MP, 1/1.55 inch)
+Ultra-Wide Camera: OV13B10 (12MP, 1/3.06 inch)
+
+Operating System: DesignKidsOS 1 (Based on Android 15)
+
+8+128: 999
+12+256: 1299
+12+512: 1499
+
+『喜羊羊与灰太狼』联名版：
+12+512: 1799`
+                },
+                {
+                    name: "DesignKidsPhone 2",
+                    specs: `Model Name: DesignKidsPhone 2
+Model Code: MRDSKPH0002
+CPU: Snapdragon® 7s Gen 3 Mobile Platform
+
+RAM / ROM: LPDDR4X / UFS 3.1
+Battery Capacity: 4200mAh
+Display: 5.4-inch BOE LCD / 1920x1080, 120Hz
+Weight: 132g
+Wired Charging Power: 45W
+
+Back Cover: High-strength matte polycarbonate
+Mid-frame: High-strength reinforced plastic with internal metal bracket
+Cover Glass: Strengthened aluminosilicate glass
+
+Operating System: DesignKidsOS 2 (Based on Android 16)
+
+6+128: 749
+8+128: 859
+8+256: 999`
+                },
+                {
+                    name: "DesignKidsPhone 2 Pro",
+                    specs: `Model Name: DesignKidsPhone 2 Pro
+Model Code: MRDSKPH002P
+CPU: Design Hs2 Mobile / 由MORO自主研发的Design Hs系列第二代移动平台
+(Design Hs2≈>Snapdragon 7 Gen 3)
+NPU: Design AI Boost 2 Mobile
+
+RAM / ROM: LPDDR5 / UFS 3.2 Pro
+Battery Capacity: 5000mAh
+Display: 5.8-inch BOE OLED / 1.2K, 120Hz
+Weight: 152g
+Wired Charging Power: 65W
+Wireless charging Power: 18.5W
+
+Body Materials: AG frosted glass back cover + sandblasted aluminum alloy frame
+Special Hardware: Action Button
+
+Main Camera: LYT-600 (50MP, 1/1.95 inch)
+Ultra-Wide Camera: OV13B10 (32MP, 1/3.14 inch)
+
+Operating System: DesignKidsOS 2 (Based on Android 16)
+
+普通版：
+8+256: 1199
+12+256: 1399
+12+512: 1599
+
+『喜羊羊与灰太狼』联名版：
+12+512: 1899`
+                }
+            ],
+            "Display Series": [
+                {
+                    name: "DesignDisplay M1",
+                    specs: `DesignDisplay M1 (Entry-Level)
+定位：全能入门与生态普及
+
+核心显示参数
+面板类型: 华星光电 (CSOT) 高刷 IPS 面板
+屏幕尺寸: 23.8 英寸
+分辨率: 1920 × 1080 (FHD)
+刷新率: 120Hz (原生) / 支持 Adaptive-Sync
+色彩与亮度: 99% sRGB 色域 / 300 nits 典型亮度 / $\Delta E < 2$ (出厂校色)
+
+生态核心 (Essential Ecosystem)
+DesignDex 快速启动
+全功能 USB-C (15W): 支持视频传输
+D-Button: 侧边物理按键，用于在手机桌面模式和 PC 信号源之间一键切换。
+简易版 M-Lift 支架: 支持仰俯调节 / VESA 75mm 标准壁挂孔。
+
+官方零售价: 899
+首销优惠价: 749
+DesignPhone 加购价: 599`
+                },
+                {
+                    name: "DesignDisplay S1",
+                    specs: `DesignDisplay S1
+
+屏幕面板 (Panel)
+面板类型: 华星光电 (CSOT) Fast-IPS
+屏幕尺寸: 23.8 英寸
+分辨率: 2560 × 1440 (2K QHD)
+像素密度: 123.4 PP
+刷新率: 144Hz (原生) / 165Hz (超频)
+响应时间: 1ms (GtG)
+
+色彩与光影 (Color & Light)
+色彩深度: 8-bit + Hi-FRC (等效 10-bit)
+色域覆盖: 100% sRGB / 95% DCI-P3
+亮度: 400 nits (典型值)
+认证: VESA DisplayHDR 400
+
+核心功能：生态激活 (Ecosystem)
+DesignDex 快速启动: 接入 USB-C 接口后，0.5秒内自动激活手机内置的桌面模式。
+DesignOS 2L Link: 完美适配 Linux 模式，支持显示器端的键鼠直连控制手机。
+一键切换: 机身侧边设有专用的 "D-Button"，可在手机 Dex 模式和电脑信号源之间快速无缝切换。
+
+接口与供电 (Connectivity)
+全功能 USB-C: 支持 80W PD 反向快充 / 支持最高 65W 的 PPS 反向快充
+其他接口: 1 × HDMI 2.0 / 1 × DisplayPort 1.4 / 2 × USB-A 3.0 (扩展坞功能)。
+
+零售价: 1499
+首销优惠价: 1299
+DesignPhone 加购价: 999`
+                },
+                {
+                    name: "DesignDisplay S1 Plus",
+                    specs: `DesignDisplay S1 Plus
+定位: 27 英寸 2K Fast-IPS 高刷生产力大屏
+
+核心参数
+面板类型: LG Fast-IPS
+屏幕尺寸: 27.0 英寸
+分辨率: 2560 × 1440 (2K QHD)
+刷新率: 原生 165Hz / 超频 180Hz
+色彩素质: 8-bit + Hi-FRC (等效 10-bit) / 99% sRGB / 95% DCI-P3
+亮度: 500 nits (典型值) / VESA DisplayHDR 500 认证
+响应时间: 1ms (GtG)
+
+补给与无线能力 (Power & Wireless)
+底座无线充: 集成 Qi2 无线快充模块，支持最高 15W 无线输出。
+有线反向供电: 全功能 USB-C 支持 PD 3.0 (100W)，完美适配手机及轻薄笔记本。
+
+核心连接性 (Connectivity)
+全功能接口: 2 × USB-C (支持 DP Alt Mode & 数据传输)。
+网络接口: 1 × 2.5GbE (2500M 网口)，大幅提升手机桌面模式的载入速度。
+视频接口: 2 × HDMI 2.1 / 1 × DisplayPort 1.4。
+数据接口: 2 × USB-A (3.2 Gen1) / 1 × 3.5mm 音频接口。
+
+生态特性
+DesignDex 2.0: 接入手机后 0.3 秒唤醒桌面模式，UI 针对 27 寸物理面积优化。
+D-Button: 侧边物理快捷键，一键切换手机系统与外接 PC 信号。
+M-Lift Pro 支架: 支持 150mm 升降、-5°~35° 俯仰、以及 90° 垂直旋转（UI 自动适配）。
+
+价格信息
+官方零售价: 2199
+首销价: 1999
+DesignPhone 加购价: 1699`
+                },
+                {
+                    name: "DesignDisplay X1s",
+                    specs: `DesignDisplay X1s
+定位：OLED 专业入门级显示器
+
+核心规格
+面板类型：LG 印刷 OLED
+屏幕尺寸: 23.8英寸
+分辨率：2560 × 1440 (2K QHD)
+刷新率：120Hz
+色彩素质：$\Delta E < 1.2$ (出厂校色)// 10-bit 真色彩 (10.7亿色) / 99% DCI-P3 色域覆盖
+峰值亮度：800 nits (HDR 峰值) / 400 nits (典型)
+
+接口与供电 (Balanced Productivity)
+全功能 USB-C：支持 90W PD 3.0 反向快充 / 支持 100W PPS 反向快充
+信号接口：1 × HDMI 2.1 / 1 × DisplayPort 1.4 / 1 × USB-C。
+
+工业设计材质：铝合金边框 + 简约版 M-Lift 支架（支持升降旋转）
+
+生态
+DesignDex 快速启动: 接入 USB-C 接口后，0.5秒内自动激活手机内置的桌面模式。
+DesignOS 2L Link: 完美适配 Linux 模式，支持显示器端的键鼠直连控制手机。
+一键切换: 机身侧边设有专用的 "D-Button"，可在手机 Dex 模式和电脑信号源之间快速无缝切换。
+
+官方零售价: 3699
+首销优惠价: 3499
+DesignPhone 加购价: 2999`
+                },
+                {
+                    name: "DesignDisplay X1",
+                    specs: `DesignDisplay X1
+屏幕面板 (Panel)
+面板类型: 华星光电 (CSOT) IJP-OLED (印刷 OLED)
+屏幕尺寸: 23.0英寸
+分辨率: 3840 × 2160 (4K UHD)
+像素密度: 191.5 PPI (视网膜级设计精度)
+刷新率: 165Hz (支持 MORO ProSync 自适应刷新技术)
+响应时间: 0.03ms (GtG)
+
+色彩与亮度 (Color & Brightness)
+色彩深度: 真 10-bit (10.7亿色)
+色域覆盖: 100% DCI-P3 / 99% Adobe RGB / 100% sRGB
+色彩精准度: $\Delta E < 1$ (出厂逐台校色)
+峰值亮度: 1200 nits (HDR 峰值) / 600 nits (典型)
+对比度: 1,000,000:1 (无限接近纯黑)
+认证: VESA DisplayHDR True Black 600
+
+交互与连接 (Connectivity)
+全功能 USB-C: 支持 140W PD 3.1 反向供电 / 支持最高 100W 的 PPS 反向快充
+视频接口: 2 × Thunderbolt 5 (支持 80Gbps 带宽) 1 × DisplayPort 2.11 × HDMI 2.1 (满血版)
+数据接口: 3 × USB-A (3.2 Gen2) / 1 × 3.5mm 音频接口
+
+工业设计 (Design)
+机身材质: 航空级铝合金一体成型 / 钢化玻璃背板
+视觉风格: 四边等宽超窄边框
+支架功能: "M-Lift" 灵动支架 (支持 150mm 升降 / -5°~35° 俯仰) / 支持 90° 垂直旋转 (自动识别重力感应切换 UI) / 兼容 VESA 75mm 标准壁挂
+
+特色功能 (Special Features)
+DesignOS 2L Link: 专为手机 Linux 模式优化的显示引擎，支持像素级 1:1 映射。
+DesignDex 快速启动: 接入 USB-C 接口后，0.5秒内自动激活手机内置的桌面模式。
+护眼技术: 硬件级低蓝光面板 + 全亮度 DC 调光。
+智能感光: 内置环境光传感器，根据房间光线自动调节亮度和色温。
+一键切换: 机身侧边设有专用的 "D-Button"，可在手机 Dex 模式和电脑信号源之间快速无缝切换。
+
+零售价: 4599
+首销优惠价: 4299
+DesignPhone 加购价: 3699`
+                },
+                {
+                    name: "DesignDisplay X1 Plus",
+                    specs: `DesignDisplay X1 Plus
+定位: 27 英寸 4K IJP-OLED 顶级桌面工作站中心
+
+核心参数
+面板类型: 华星光电 (CSOT) IJP-OLED (印刷 OLED)
+屏幕尺寸: 27.0 英寸
+分辨率: 3840 × 2160 (4K UHD)
+刷新率: 165Hz (支持 MORO ProSync 自适应刷新技术)
+色彩素质: 真 10-bit / 100% DCI-P3 / 99% Adobe RGB
+色彩精准度:  (专业级出厂逐台校色)
+峰值亮度: 1200 nits (HDR) / 600 nits (典型)
+响应时间: 0.03ms (GtG)
+
+补给与无线能力
+底座无线充: 集成 Qi2 磁吸无线快充模块，支持最高 25W 无线输出 (兼容 DesignPhone 全系列及 Qi2 协议设备)。
+有线反向供电: 全功能 USB-C 支持 PD 3.1 (240W EPR)，可直接驱动高性能游戏本或工作站。
+
+顶级连接性 (Connectivity)
+雷电接口: 3 × Thunderbolt 5 (支持 80Gbps/120Gbps 带宽，支持三屏菊花链串联)。
+网络接口: 1 × 10GbE (万兆网口)，接入手机后可为 DesignOS 2L 提供极速有线背板。
+视频接口: 1 × DisplayPort 2.1 (UHBR20) / 1 × HDMI 2.1 (48Gbps)。
+数据接口: 4 × USB-A (3.2 Gen2) / 1 × SD 4.1 (UHS-III) 读卡器 (侧边)。
+
+生态特性
+DesignDex 2.0: 接入手机后 0.3 秒唤醒桌面模式，UI 针对 27 寸物理面积优化。
+D-Button: 侧边物理快捷键，一键切换手机系统与外接 PC 信号。
+M-Lift Pro 支架: 支持 150mm 升降、-5°~35° 俯仰、以及 90° 垂直旋转（UI 自动适配）。
+
+价格信息
+官方零售价: 5999
+首销价: 5499
+DesignPhone 加购价：4999`
+                }
+            ],
+            "DesignPad Series": [] // Newly requested series
+        };
+
+        // --- Application State ---
+        let appData;
+        
+        // Attempt to load from localStorage
+        try {
+            const localData = JSON.parse(localStorage.getItem('designPhoneData'));
+            if (localData && typeof localData === 'object') {
+                appData = localData;
+                // Merge Logic: Ensure keys from initialData exist in appData
+                Object.keys(initialData).forEach(key => {
+                    if (!appData.hasOwnProperty(key)) {
+                        appData[key] = initialData[key];
+                    }
+                });
+            } else {
+                appData = initialData;
+            }
+        } catch (e) {
+            console.error("Data load error", e);
+            appData = initialData;
+        }
+
+        // Ensure current series exists
+        let currentSeries = Object.keys(appData)[0] || '';
+        let editingDeviceIndex = -1; 
+        let originalSeriesForEdit = ""; 
+        let isSidebarOpen = true;
+
+        // --- DOM Elements ---
+        const seriesListEl = document.getElementById('series-list');
+        const productContainerEl = document.getElementById('product-container');
+        const currentSeriesTitleEl = document.getElementById('current-series-title');
+        const deviceGridEl = document.getElementById('device-grid');
+        const deviceDialog = document.getElementById('device-dialog');
+        const seriesDialog = document.getElementById('series-dialog');
+        const themeIcon = document.getElementById('theme-icon');
+        const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
+        const deviceSeriesSelect = document.getElementById('device-series');
+        const confirmDialog = document.getElementById('confirm-dialog');
+        const confirmMessage = document.getElementById('confirm-message');
+        const confirmOkBtn = document.getElementById('confirm-ok-btn');
+        const confirmCancelBtn = document.getElementById('confirm-cancel-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // --- Toast & Dialog Logic ---
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', '-translate-y-4');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-4');
+            }, 3000);
+        }
+
+        let confirmCallback = null;
+        function showConfirm(message, callback) {
+            confirmMessage.textContent = message;
+            confirmCallback = callback;
+            confirmDialog.showModal();
+            // Animate in
+            document.getElementById('confirm-panel').classList.remove('scale-95', 'opacity-0');
+        }
+
+        function closeConfirm() {
+            document.getElementById('confirm-panel').classList.add('scale-95', 'opacity-0');
+            setTimeout(() => confirmDialog.close(), 150);
+        }
+
+        confirmCancelBtn.onclick = closeConfirm;
+        confirmOkBtn.onclick = () => {
+            if (confirmCallback) confirmCallback();
+            closeConfirm();
+        };
+
+        // --- Core Functions ---
+
+        function saveDataLocally() {
+            localStorage.setItem('designPhoneData', JSON.stringify(appData));
+        }
+
+        function renderSeriesList() {
+            seriesListEl.innerHTML = '';
+            Object.keys(appData).forEach(series => {
+                const btnContainer = document.createElement('div');
+                btnContainer.className = `w-full flex items-center justify-between px-5 py-3 rounded-2xl mb-1 group transition-expressive cursor-pointer relative ${
+                    series === currentSeries
+                    ? 'bg-primary-500 text-white shadow-md' 
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+                }`;
+                
+                btnContainer.onclick = () => {
+                    currentSeries = series;
+                    renderSeriesList();
+                    renderDevices();
+                    if (window.innerWidth < 768) toggleSidebar();
+                };
+
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = series;
+                titleSpan.className = "font-medium truncate mr-2";
+
+                const rightContainer = document.createElement('div');
+                rightContainer.className = "flex items-center gap-2";
+
+                // Count badge
+                const badge = document.createElement('span');
+                badge.className = `text-xs py-0.5 px-2 rounded-full ${
+                    series === currentSeries
+                    ? 'bg-white/20 text-white' 
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                }`;
+                badge.textContent = appData[series].length;
+
+                // Delete Button (New)
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = '<span class="material-symbols-rounded text-lg">delete</span>';
+                deleteBtn.className = `p-1 rounded-full transition-colors opacity-0 group-hover:opacity-100 ${
+                    series === currentSeries 
+                    ? 'hover:bg-white/20 text-white/70 hover:text-white' 
+                    : 'hover:bg-red-100 text-slate-400 hover:text-red-500'
+                }`;
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    deleteSeries(series);
+                };
+
+                rightContainer.appendChild(badge);
+                rightContainer.appendChild(deleteBtn);
+
+                btnContainer.appendChild(titleSpan);
+                btnContainer.appendChild(rightContainer);
+                seriesListEl.appendChild(btnContainer);
+            });
+            
+            // Update Headers
+            currentSeriesTitleEl.textContent = currentSeries || "无可用系列";
+            document.getElementById('mobile-header-title').textContent = currentSeries || "产品列表";
+        }
+
+        function deleteSeries(seriesName) {
+            showConfirm(`确定要删除系列 "${seriesName}" 及其所有数据吗？`, () => {
+                delete appData[seriesName];
+                
+                // If we deleted the currently selected series
+                if (currentSeries === seriesName) {
+                    const remainingKeys = Object.keys(appData);
+                    if (remainingKeys.length > 0) {
+                        currentSeries = remainingKeys[0];
+                    } else {
+                        currentSeries = "";
+                    }
+                }
+                
+                saveDataLocally();
+                renderSeriesList();
+                renderDevices();
+                showToast("系列已删除");
+            });
+        }
+
+        function renderDevices() {
+            deviceGridEl.innerHTML = '';
+            
+            if (!currentSeries || !appData[currentSeries]) {
+                deviceGridEl.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-20 opacity-50 animate-fade-in-up">
+                        <span class="material-symbols-rounded text-6xl mb-4">layers_clear</span>
+                        <p class="text-xl">暂无数据或系列</p>
+                        <button onclick="openAddSeriesModal()" class="mt-4 text-primary-500 font-medium hover:underline">创建新系列</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const devices = appData[currentSeries];
+
+            if (devices.length === 0) {
+                deviceGridEl.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-20 opacity-50 animate-fade-in-up">
+                        <span class="material-symbols-rounded text-6xl mb-4">phonelink_off</span>
+                        <p class="text-xl">该系列暂无产品</p>
+                    </div>
+                `;
+                return;
+            }
+
+            devices.forEach((device, index) => {
+                const card = document.createElement('div');
+                const staggerClass = `stagger-${(index % 6) + 1}`;
+                card.className = `bg-white dark:bg-[#1e2329] p-6 rounded-[28px] shadow-m3-1 hover:shadow-m3-2 transition-expressive group relative flex flex-col animate-fade-in-up ${staggerClass} opacity-0`;
+                
+                const previewSpecs = device.specs.split('\n').slice(0, 4).join('\n') + (device.specs.split('\n').length > 4 ? '...' : '');
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300 flex items-center justify-center">
+                            <span class="material-symbols-rounded">smartphone</span>
+                        </div>
+                        <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="editDevice(${index})" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500" title="编辑">
+                                <span class="material-symbols-rounded text-sm">edit</span>
+                            </button>
+                            <button onclick="deleteDevice(${index})" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500" title="删除">
+                                <span class="material-symbols-rounded text-sm">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-slate-100">${device.name}</h3>
+                    <div class="text-sm text-slate-500 dark:text-slate-400 specs-text flex-1">${previewSpecs}</div>
+                    
+                    <button onclick="viewDevice(${index})" class="mt-4 w-full py-2 rounded-xl text-primary-500 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/20 hover:bg-primary-100 dark:hover:bg-primary-900/40 text-sm font-medium transition-colors">
+                        查看详情
+                    </button>
+                `;
+                deviceGridEl.appendChild(card);
+            });
+        }
+
+        // --- Helper: Populate Series Dropdown ---
+        function populateSeriesDropdown() {
+            deviceSeriesSelect.innerHTML = '';
+            Object.keys(appData).forEach(series => {
+                const option = document.createElement('option');
+                option.value = series;
+                option.textContent = series;
+                deviceSeriesSelect.appendChild(option);
+            });
+        }
+
+        // --- Import / Export Functions ---
+        function exportData() {
+            const dataStr = JSON.stringify(appData, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `DesignPhone_Backup_${new Date().toISOString().slice(0,10)}.dslib`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("导出成功");
+        }
+
+        function triggerImport() {
+            document.getElementById('import-file').click();
+        }
+
+        function importData(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (importedData && typeof importedData === 'object') {
+                        showConfirm('导入将覆盖当前所有数据，确定继续吗？', () => {
+                            appData = importedData;
+                            // Ensure current series exists
+                            if (!appData[currentSeries]) {
+                                currentSeries = Object.keys(appData)[0] || '';
+                            }
+                            saveDataLocally();
+                            renderSeriesList();
+                            renderDevices();
+                            showToast('导入成功');
+                        });
+                    } else {
+                        alert('文件格式无效'); // Fallback for critical error
+                    }
+                } catch (error) {
+                    alert('无法解析文件：' + error.message);
+                }
+                input.value = '';
+            };
+            reader.readAsText(file);
+        }
+
+        // --- Actions ---
+
+        function openAddSeriesModal() {
+            document.getElementById('new-series-name').value = '';
+            seriesDialog.showModal();
+        }
+
+        function addNewSeries() {
+            const name = document.getElementById('new-series-name').value.trim();
+            if (name) {
+                if (appData[name]) {
+                    showToast('该系列已存在');
+                    return;
+                }
+                appData[name] = [];
+                currentSeries = name;
+                saveDataLocally();
+                renderSeriesList();
+                renderDevices();
+                seriesDialog.close();
+                showToast('系列创建成功');
+            }
+        }
+
+        function resetDialogState() {
+            document.getElementById('device-name').readOnly = false;
+            document.getElementById('device-specs').readOnly = false;
+            deviceSeriesSelect.disabled = false;
+            document.getElementById('dialog-save-btn').classList.remove('hidden');
+        }
+
+        function openAddDeviceModal() {
+            editingDeviceIndex = -1;
+            originalSeriesForEdit = currentSeries;
+            resetDialogState();
+            document.getElementById('dialog-title').textContent = '添加新机型';
+            document.getElementById('device-name').value = '';
+            document.getElementById('device-specs').value = '';
+            
+            populateSeriesDropdown();
+            deviceSeriesSelect.value = currentSeries;
+
+            document.getElementById('dialog-panel').classList.remove('scale-95', 'opacity-0');
+            deviceDialog.showModal();
+        }
+
+        function editDevice(index) {
+            editingDeviceIndex = index;
+            originalSeriesForEdit = currentSeries;
+            resetDialogState();
+            const device = appData[currentSeries][index];
+            document.getElementById('dialog-title').textContent = '编辑机型';
+            document.getElementById('device-name').value = device.name;
+            document.getElementById('device-specs').value = device.specs;
+            
+            populateSeriesDropdown();
+            deviceSeriesSelect.value = currentSeries;
+
+            document.getElementById('dialog-panel').classList.remove('scale-95', 'opacity-0');
+            deviceDialog.showModal();
+        }
+
+        function viewDevice(index) {
+            const device = appData[currentSeries][index];
+            document.getElementById('dialog-title').textContent = '机型详情';
+            
+            document.getElementById('device-name').value = device.name;
+            document.getElementById('device-specs').value = device.specs;
+            populateSeriesDropdown();
+            deviceSeriesSelect.value = currentSeries;
+
+            document.getElementById('device-name').readOnly = true;
+            document.getElementById('device-specs').readOnly = true;
+            deviceSeriesSelect.disabled = true;
+
+            document.getElementById('dialog-save-btn').classList.add('hidden');
+
+            document.getElementById('dialog-panel').classList.remove('scale-95', 'opacity-0');
+            deviceDialog.showModal();
+        }
+
+        function closeDeviceDialog() {
+            document.getElementById('dialog-panel').classList.add('scale-95', 'opacity-0');
+            setTimeout(() => deviceDialog.close(), 150);
+        }
+
+        function saveDevice() {
+            const name = document.getElementById('device-name').value.trim();
+            const specs = document.getElementById('device-specs').value.trim();
+            const selectedSeries = deviceSeriesSelect.value;
+
+            if (!name) {
+                showToast('请输入机型名称');
+                return;
+            }
+
+            const deviceData = { name, specs };
+
+            if (editingDeviceIndex === -1) {
+                appData[selectedSeries].push(deviceData);
+                currentSeries = selectedSeries;
+            } else {
+                if (selectedSeries === originalSeriesForEdit) {
+                    appData[originalSeriesForEdit][editingDeviceIndex] = deviceData;
+                } else {
+                    appData[originalSeriesForEdit].splice(editingDeviceIndex, 1);
+                    appData[selectedSeries].push(deviceData);
+                    currentSeries = selectedSeries;
+                }
+            }
+
+            saveDataLocally();
+            renderSeriesList(); 
+            renderDevices();
+            closeDeviceDialog();
+            showToast('保存成功');
+        }
+
+        function deleteDevice(index) {
+            showConfirm('确定要删除此机型吗？', () => {
+                appData[currentSeries].splice(index, 1);
+                saveDataLocally();
+                renderSeriesList();
+                renderDevices();
+                showToast('删除成功');
+            });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.textContent = 'dark_mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                html.classList.remove('light');
+                themeIcon.textContent = 'light_mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function toggleSidebar() {
+            const body = document.body;
+            if (window.innerWidth < 768) {
+                const sidebar = document.getElementById('main-sidebar');
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.remove('-translate-x-full');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            } else {
+                if (isSidebarOpen) {
+                    body.classList.add('sidebar-closed');
+                    sidebarOpenBtn.classList.remove('md:hidden');
+                    sidebarOpenBtn.classList.add('md:flex');
+                } else {
+                    body.classList.remove('sidebar-closed');
+                    sidebarOpenBtn.classList.add('md:hidden');
+                    sidebarOpenBtn.classList.remove('md:flex');
+                }
+                isSidebarOpen = !isSidebarOpen;
+            }
+        }
+
+        // --- Initialization ---
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            themeIcon.textContent = 'light_mode';
+        }
+
+        if (window.innerWidth < 768) {
+            document.getElementById('main-sidebar').classList.add('-translate-x-full');
+        }
+
+        renderSeriesList();
+        renderDevices();
+
+    </script>
+</body>
+</html>
